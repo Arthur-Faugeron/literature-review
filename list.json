@@ -1,0 +1,50 @@
+[
+  {
+    "id": "16082026_gilchristzakrajsek",
+    "title": "Credit Spreads and Business Cycle Fluctuations",
+    "authors": ["Simon Gilchrist", "Egon Zakrajšek"],
+    "year": 2012,
+    "series": "Macro-Finance",
+    "field": "Finance",
+    "subfield": "Macro-Finance / Corporate Bond Markets",
+    "keywords": [
+      "Credit Spreads",
+      "Excess Bond Premium",
+      "Financial Accelerator",
+      "Business Cycle Forecasting",
+      "Distance to Default",
+      "Corporate Bonds"
+    ],
+    "methods": [
+      "Forecasting Regression",
+      "Merton Distance-to-Default Model",
+      "Panel Credit-Spread Pricing Regression",
+      "Structural VAR",
+      "Impulse Response / Variance Decomposition"
+    ],
+    "datasets": [
+      "Lehman/Warga Corporate Bond Database",
+      "Merrill Lynch Corporate Bond Database",
+      "Compustat",
+      "CRSP",
+      "Federal Reserve H.15 Selected Interest Rates",
+      "Senior Loan Officer Opinion Survey"
+    ],
+    "research_question": "Do bond-level, duration-matched corporate credit spreads forecast future US real activity beyond the term spread and policy rate, and does that forecasting power reflect default risk or a separate, time-varying excess bond premium tied to financial-intermediary risk-bearing capacity?",
+    "main_finding": "The GZ credit spread substantially outperforms the Baa-Aaa and paper-bill spreads as a predictor of employment, industrial production and GDP growth; most of this predictive power, especially after 1985, comes from the excess bond premium rather than measured default risk, and orthogonalized shocks to the premium produce sizeable, persistent declines in consumption, investment, output and equity prices in a VAR.",
+    "research_gaps": [
+      "Sample restricted to large, bond-market-active firms; bank-dependent firms untested",
+      "Causal, credit-supply interpretation of excess-bond-premium shocks relies on a standard but unverified recursive VAR ordering",
+      "No out-of-sample / real-time forecast evaluation is reported",
+      "Cannot cleanly separate the risk-bearing-capacity channel from a time-varying disaster-risk alternative"
+    ],
+    "research_ideas": [
+      "Construct an excess bank-loan premium from syndicated loan pricing data to test the mechanism among bank-dependent firms",
+      "Extend the excess bond premium to a growth-at-risk, quantile-regression framework",
+      "High-frequency identification of excess-bond-premium shocks around bank-capital and regulatory announcements",
+      "Construct a euro-area analogue of the GZ spread to test the mechanism against the sovereign-bank nexus",
+      "Use option-implied disaster-risk measures to separate the risk-bearing-capacity channel from time-varying disaster risk"
+    ],
+    "path": "Literature Review/SERIES/Macro-Finance/16082026_gilchristzakrajsek/review.pdf"
+  }
+]
