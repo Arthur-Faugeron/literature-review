@@ -135,8 +135,6 @@
       .attr("y", "0.32em")
       .text((d) => truncate(d.title, 38));
 
-    let pinnedId = null;
-
     function setActive(id) {
       const neighbors = adjacency.get(id) || new Set();
       nodeSel.classed("is-active", (d) => d.id === id).classed("is-dim", (d) => d.id !== id && !neighbors.has(d.id));
@@ -147,10 +145,6 @@
     }
 
     function clearActive() {
-      if (pinnedId) {
-        setActive(pinnedId);
-        return;
-      }
       nodeSel.classed("is-active", false).classed("is-dim", false);
       linkSel.classed("is-active", false).classed("is-dim", false);
       renderDetail(detailEl, null);
@@ -161,15 +155,11 @@
       .on("mouseleave", clearActive)
       .on("click", (event, d) => {
         event.stopPropagation();
-        pinnedId = pinnedId === d.id ? null : d.id;
-        if (pinnedId) setActive(pinnedId);
-        else clearActive();
+        const node = nodeById.get(d.id);
+        if (node && node.reviewHref) {
+          window.open(node.reviewHref, "_blank", "noopener,noreferrer");
+        }
       });
-
-    svg.on("click", () => {
-      pinnedId = null;
-      clearActive();
-    });
 
     renderDetail(detailEl, null);
 

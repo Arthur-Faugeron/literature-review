@@ -40,10 +40,6 @@ body {
   border-right: 1px solid var(--camel);
 }
 
-.page--wide {
-  max-width: 980px;
-}
-
 /* Site header */
 
 .site-header {
@@ -58,10 +54,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
-
-.site-header .utility-nav--wide {
-  max-width: 980px;
 }
 
 .utility-nav a {
