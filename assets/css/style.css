@@ -212,23 +212,17 @@ body {
 }
 
 .graph-node circle {
-  fill: var(--navy);
   stroke: var(--ivory);
   stroke-width: 1.5px;
 }
 
-.graph-node.is-dim circle {
-  fill: var(--camel);
-}
-
-.graph-node.is-dim text {
-  fill: var(--tweed);
-  opacity: 0.55;
+.graph-node.is-dim {
+  opacity: 0.22;
 }
 
 .graph-node.is-active circle {
-  fill: var(--olive);
   stroke: var(--olive);
+  stroke-width: 2.5px;
 }
 
 .graph-node.is-active text {
@@ -238,16 +232,42 @@ body {
 
 .graph-link {
   stroke: var(--tweed);
-  stroke-opacity: 0.35;
+  stroke-opacity: 0.4;
+  fill: none;
 }
 
 .graph-link.is-dim {
-  stroke-opacity: 0.08;
+  opacity: 0.1;
 }
 
 .graph-link.is-active {
   stroke: var(--olive);
-  stroke-opacity: 0.85;
+  stroke-opacity: 0.9;
+}
+
+.graph-legend {
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.1rem;
+}
+
+.graph-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--tweed);
+}
+
+.graph-legend-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
 }
 
 .graph-hint {

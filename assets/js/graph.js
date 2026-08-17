@@ -1,6 +1,25 @@
 (function () {
   "use strict";
 
+  // Six restrained, desaturated tones in the same family as the palette -
+  // a "leather library" set, not a bright categorical rainbow. Indexed by
+  // each paper's meta-group (see scripts/build.js SERIES_GROUPS order).
+  const GROUP_COLORS = ["#172A3A", "#3F4A32", "#6B5744", "#8B6B3D", "#3E5266", "#5C3232"];
+
+  const LINK_DASH = {
+    conceptual: null,
+    methodological: "5,3",
+    empirical: "1,3",
+  };
+
+  function colorForGroup(index) {
+    return GROUP_COLORS[(index || 0) % GROUP_COLORS.length];
+  }
+
+  function dashForType(type) {
+    return LINK_DASH[type] || null;
+  }
+
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -53,14 +72,37 @@
     ].join("");
   }
 
-  function renderGraph(container, detailEl, graphData) {
+  function renderLegend(legendEl, nodes, groupLegend) {
+    if (!legendEl) return;
+    const used = Array.from(new Set(nodes.map((n) => n.groupIndex || 0))).sort((a, b) => a - b);
+    if (used.length < 2) {
+      legendEl.innerHTML = "";
+      return;
+    }
+    legendEl.innerHTML = used
+      .map((i) => {
+        const name = (groupLegend && groupLegend[i]) || "Other";
+        return [
+          '<span class="graph-legend-item">',
+          `<span class="graph-legend-swatch" style="background:${colorForGroup(i)}"></span>`,
+          escapeHtml(name),
+          "</span>",
+        ].join("");
+      })
+      .join("");
+  }
+
+  function renderGraph(container, detailEl, legendEl, graphData) {
     const nodes = (graphData.nodes || []).map((d) => Object.assign({}, d));
     const links = (graphData.links || []).map((d) => Object.assign({}, d));
 
     if (nodes.length === 0) {
       container.innerHTML = '<p class="graph-empty">Your library graph will take shape as reviews are added.</p>';
+      if (legendEl) legendEl.innerHTML = "";
       return;
     }
+
+    renderLegend(legendEl, nodes, graphData.groupLegend);
 
     container.innerHTML = "";
 
@@ -116,7 +158,8 @@
       .data(links)
       .join("line")
       .attr("class", "graph-link")
-      .attr("stroke-width", (d) => 0.6 + (d.strength || 1) * 0.35);
+      .attr("stroke-width", (d) => 0.6 + (d.strength || 1) * 0.35)
+      .attr("stroke-dasharray", (d) => dashForType(d.type));
 
     const nodeSel = g
       .append("g")
@@ -127,11 +170,18 @@
       .attr("class", "graph-node")
       .call(drag(simulation));
 
-    nodeSel.append("circle").attr("r", (d) => 5 + Math.min(degree.get(d.id) || 0, 8) * 1.5);
+    function radiusFor(d) {
+      return 6 + Math.min(degree.get(d.id) || 0, 10) * 1.9;
+    }
+
+    nodeSel
+      .append("circle")
+      .attr("r", radiusFor)
+      .style("fill", (d) => colorForGroup(d.groupIndex));
 
     nodeSel
       .append("text")
-      .attr("x", (d) => 9 + Math.min(degree.get(d.id) || 0, 8) * 1.5)
+      .attr("x", (d) => radiusFor(d) + 4)
       .attr("y", "0.32em")
       .text((d) => truncate(d.title, 38));
 
@@ -177,13 +227,14 @@
     const container = document.getElementById("graph-container");
     if (!container) return;
     const detailEl = document.getElementById("graph-detail");
+    const legendEl = document.getElementById("graph-legend");
 
     fetch("library.json", { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`library.json: HTTP ${res.status}`);
         return res.json();
       })
-      .then((data) => renderGraph(container, detailEl, data.graph || { nodes: [], links: [] }))
+      .then((data) => renderGraph(container, detailEl, legendEl, data.graph || { nodes: [], links: [] }))
       .catch((err) => {
         container.innerHTML = '<p class="graph-empty">Unable to load the graph right now.</p>';
         console.error(err);

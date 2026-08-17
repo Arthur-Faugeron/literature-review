@@ -85,14 +85,27 @@ function parseDateFromId(id) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-function readJson(file, fallback) {
+// list.jsonl / graph.jsonl are JSON Lines: one JSON object per line, so that
+// adding a paper is a pure append (no read-modify-rewrite of a growing array).
+function readJsonl(file) {
   const p = path.join(ROOT, file);
-  if (!fs.existsSync(p)) return fallback;
-  return JSON.parse(fs.readFileSync(p, "utf8"));
+  if (!fs.existsSync(p)) return [];
+  return fs
+    .readFileSync(p, "utf8")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, i) => {
+      try {
+        return JSON.parse(line);
+      } catch (err) {
+        throw new Error(`${file}:${i + 1}: invalid JSON line - ${err.message}`);
+      }
+    });
 }
 
-const list = readJson("list.json", []);
-const graph = readJson("graph.json", []);
+const list = readJsonl("list.jsonl");
+const graph = readJsonl("graph.jsonl");
 
 const connectionsById = new Map();
 for (const entry of graph) {
@@ -158,6 +171,12 @@ function buildPaper(entry) {
 const papers = list.map(buildPaper);
 const paperById = new Map(papers.map((p) => [p.id, p]));
 
+const groupBySeries = new Map();
+for (const group of SERIES_GROUPS) {
+  for (const seriesName of group.series) groupBySeries.set(normalize(seriesName), group.name);
+}
+const groupIndex = new Map(SERIES_GROUPS.map((g, i) => [g.name, i]));
+
 const groups = SERIES_GROUPS.map((group) => ({
   name: group.name,
   series: group.series.map((seriesName) => ({
@@ -195,6 +214,8 @@ const nodes = papers.map((p) => ({
   id: p.id,
   title: p.title,
   series: p.series,
+  group: groupBySeries.get(normalize(p.series)) || null,
+  groupIndex: groupIndex.get(groupBySeries.get(normalize(p.series))) ?? 0,
   year: p.year,
   authorsLabel: p.authorsLabel,
   mainFinding: p.mainFinding,
@@ -210,7 +231,7 @@ const library = {
   lastUpdatedLabel: latest ? latest.dateAddedLabel : "No reviews on file",
   latest,
   groups,
-  graph: { nodes, links },
+  graph: { nodes, links, groupLegend: SERIES_GROUPS.map((g) => g.name) },
 };
 
 fs.writeFileSync(path.join(ROOT, "library.json"), JSON.stringify(library, null, 2), "utf8");
