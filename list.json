@@ -46,5 +46,48 @@
       "Use option-implied disaster-risk measures to separate the risk-bearing-capacity channel from time-varying disaster risk"
     ],
     "path": "Literature Review/SERIES/Macro-Finance/16082026_gilchristzakrajsek/review.pdf"
+  },
+  {
+    "id": "17082026_kiyotakimoore",
+    "title": "Credit Cycles",
+    "authors": ["Nobuhiro Kiyotaki", "John Moore"],
+    "year": 1997,
+    "series": "Macro-Finance",
+    "field": "Finance",
+    "subfield": "Macro-Finance / Collateral Constraints and Business Cycles",
+    "keywords": [
+      "Collateral Constraints",
+      "Credit Cycles",
+      "Financial Accelerator",
+      "Asset Prices",
+      "Leverage",
+      "Dynamic Multiplier",
+      "Predator-Prey Dynamics"
+    ],
+    "methods": [
+      "Dynamic General Equilibrium Theory",
+      "Linearization / Saddle-Path Solution",
+      "Nonlinear Perfect-Foresight Shooting Simulation",
+      "Comparative Statics"
+    ],
+    "datasets": [
+      "None (theoretical paper; illustrative numerical simulation only)"
+    ],
+    "research_question": "In an economy where debt must be secured by durable, productive collateral, how large and how persistent are the responses of asset prices, investment and output to a small, temporary shock, and can the interaction between debt and collateral generate cycles on its own?",
+    "main_finding": "Because the collateral asset's price capitalizes the entire expected future path of credit-constraint tightness, the dynamic multiplier on asset prices exceeds the static multiplier by a factor equal to the inverse of the net real interest rate; a temporary 1% shock generates land-price and output responses of comparable size to the shock, persisting roughly a decade, and lumpy investment can generate damped, multi-year predator-prey cycles between debt and landholding.",
+    "research_gaps": [
+      "No priced credit risk: lenders are risk-neutral, so the model speaks to credit quantities, not credit spreads",
+      "No theory of who becomes credit-constrained or when",
+      "Mechanism not robust to hedging markets against the aggregate shock (Krishnamurthy 2003)",
+      "Purely deterministic, one-time shock; authors flag a fully stochastic extension as the 'pressing next step'"
+    ],
+    "research_ideas": [
+      "Solve a fully stochastic, globally-solved version of the model with recurring, anticipated shocks",
+      "Test the lumpy-investment build-up prediction against farm- or firm-level micro data",
+      "Endogenize the supply of hedging instruments to restore amplification and generate a priced credit spread",
+      "Cross-country test of the elasticity threshold separating cyclical from monotonic collateral dynamics",
+      "Horse race between collateral-constraint and heterogeneous-beliefs explanations of asset-price overshooting"
+    ],
+    "path": "Literature Review/SERIES/Macro-Finance/17082026_kiyotakimoore/review.pdf"
   }
 ]

@@ -2,5 +2,20 @@
   {
     "paper": "16082026_gilchristzakrajsek",
     "connections": []
+  },
+  {
+    "paper": "17082026_kiyotakimoore",
+    "connections": [
+      {
+        "target": "16082026_gilchristzakrajsek",
+        "type": "conceptual",
+        "keywords": [
+          "Financial Accelerator",
+          "Leverage",
+          "Credit Constraints"
+        ],
+        "strength": 6
+      }
+    ]
   }
 ]
