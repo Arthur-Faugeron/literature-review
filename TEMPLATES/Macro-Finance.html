@@ -55,10 +55,10 @@ body {
    section in CLAUDE.md) so this stays the rare exception. */
 .frontpage {
   page-break-after: always;
-  padding-top: 18mm;
+  padding-top: 12mm;
 }
 .frontpage .imprint {
-  margin-top: 14mm;
+  margin-top: 3mm;
 }
 
 .frontpage .kicker {
@@ -269,6 +269,27 @@ table.data tfoot td {
   font-size: 9.4pt;
   text-align: left;
 }
+
+/* ---------- Page-flow integrity ----------
+   Added after a defect where a table row split across a page boundary
+   (Result 5/7 row) and the front-page abstract silently overflowed page 1.
+   These rules are structural fragmentation controls, not report-specific
+   spacing values, so they belong in the template per the CLAUDE.md rule
+   that template-level defects must be fixed here, once, for every future
+   report in the series. Keep the front-page abstract to 150-220 words
+   (see CLAUDE.md Section 31) so the front page still fits in the normal
+   case; if it runs long, normal block flow (see the .frontpage comment
+   above) lets it spill onto page 2 rather than clipping. */
+table.data tr { page-break-inside: avoid; break-inside: avoid; }
+table.data thead { display: table-header-group; }
+.figure, .equation, .idea { page-break-inside: avoid; break-inside: avoid; }
+h2.section, h3.subsection, h4.minor { page-break-after: avoid; break-after: avoid; }
+/* .synthesis is a long sequence of short h4/p pairs, not one atomic fact;
+   forcing it whole onto one page can strand its own heading on the page
+   before (an orphan worse than the fragmentation this rule set exists to
+   prevent), so it is deliberately left to paginate like ordinary body
+   content. Its individual h4/p pairs are already protected by the
+   heading-orphan rule above. */
 </style>
 </head>
 <body>
