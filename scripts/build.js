@@ -2,10 +2,10 @@
 "use strict";
 
 /*
- * Reads list.json + graph.json (the actual content database - hand/AI
- * curated, committed to git) and cross-checks them against the real
- * files under SERIES/, then writes library.json: a single merged file
- * both index.html (graph) and archive.html (search) fetch at runtime.
+ * Reads list.jsonl (the actual content database - hand/AI curated,
+ * committed to git) and cross-checks it against the real files under
+ * SERIES/, then writes library.json: a single merged file both
+ * index.html (home) and archive.html (search) fetch at runtime.
  *
  * Runs automatically on every push via .github/workflows/deploy.yml.
  * You do not need to run this by hand - it's here mainly so you can
@@ -20,9 +20,6 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const SERIES_ROOT = path.join(ROOT, "SERIES");
-
-const GITHUB_REPO = "Arthur-Faugeron/literature-review";
-const GITHUB_BRANCH = "main";
 
 // Canonical series list, exact spelling as used in CLAUDE.md.
 const SERIES_GROUPS = [
@@ -85,8 +82,8 @@ function parseDateFromId(id) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-// list.jsonl / graph.jsonl are JSON Lines: one JSON object per line, so that
-// adding a paper is a pure append (no read-modify-rewrite of a growing array).
+// list.jsonl is JSON Lines: one JSON object per line, so that adding a
+// paper is a pure append (no read-modify-rewrite of a growing array).
 function readJsonl(file) {
   const p = path.join(ROOT, file);
   if (!fs.existsSync(p)) return [];
@@ -105,12 +102,6 @@ function readJsonl(file) {
 }
 
 const list = readJsonl("list.jsonl");
-const graph = readJsonl("graph.jsonl");
-
-const connectionsById = new Map();
-for (const entry of graph) {
-  connectionsById.set(entry.paper, Array.isArray(entry.connections) ? entry.connections : []);
-}
 
 const dirByNormalizedSeries = new Map();
 if (fs.existsSync(SERIES_ROOT)) {
@@ -125,11 +116,9 @@ function buildPaper(entry) {
   const folder = actualSeriesDir ? path.join(SERIES_ROOT, actualSeriesDir, entry.id) : null;
 
   const reviewPath = folder ? path.join(folder, "review.pdf") : null;
-  const notebookPath = folder ? path.join(folder, "notebook.ipynb") : null;
   const paperPath = folder ? path.join(folder, "paper.pdf") : null;
 
   const reviewExists = !!reviewPath && fs.existsSync(reviewPath);
-  const notebookExists = !!notebookPath && fs.existsSync(notebookPath);
   const paperExists = !!paperPath && fs.existsSync(paperPath);
 
   if (!reviewExists) {
@@ -159,23 +148,11 @@ function buildPaper(entry) {
     dateAddedIso: dateAdded ? dateAdded.toISOString().slice(0, 10) : null,
     dateAddedLabel: dateAdded ? formatDate(dateAdded) : "Undated",
     reviewHref: reviewExists ? encodePath([...repoPathPrefix, "review.pdf"]) : null,
-    notebookHref: notebookExists ? encodePath([...repoPathPrefix, "notebook.ipynb"]) : null,
-    notebookGithubHref: notebookExists
-      ? `https://github.com/${GITHUB_REPO}/blob/${GITHUB_BRANCH}/${encodePath([...repoPathPrefix, "notebook.ipynb"])}`
-      : null,
     paperHref: paperExists ? encodePath([...repoPathPrefix, "paper.pdf"]) : null,
-    connections: (connectionsById.get(entry.id) || []).filter((c) => list.some((p) => p.id === c.target)),
   };
 }
 
 const papers = list.map(buildPaper);
-const paperById = new Map(papers.map((p) => [p.id, p]));
-
-const groupBySeries = new Map();
-for (const group of SERIES_GROUPS) {
-  for (const seriesName of group.series) groupBySeries.set(normalize(seriesName), group.name);
-}
-const groupIndex = new Map(SERIES_GROUPS.map((g, i) => [g.name, i]));
 
 const groups = SERIES_GROUPS.map((group) => ({
   name: group.name,
@@ -197,32 +174,6 @@ for (const p of papers) {
   }
 }
 
-// Graph edges: dedupe unordered pairs (A->B and B->A both listed is common).
-const seenPairs = new Set();
-const links = [];
-for (const p of papers) {
-  for (const c of p.connections) {
-    if (!paperById.has(c.target)) continue;
-    const pairKey = [p.id, c.target].sort().join("::");
-    if (seenPairs.has(pairKey)) continue;
-    seenPairs.add(pairKey);
-    links.push({ source: p.id, target: c.target, type: c.type || null, keywords: c.keywords || [], strength: c.strength || 1 });
-  }
-}
-
-const nodes = papers.map((p) => ({
-  id: p.id,
-  title: p.title,
-  series: p.series,
-  group: groupBySeries.get(normalize(p.series)) || null,
-  groupIndex: groupIndex.get(groupBySeries.get(normalize(p.series))) ?? 0,
-  year: p.year,
-  authorsLabel: p.authorsLabel,
-  mainFinding: p.mainFinding,
-  reviewHref: p.reviewHref,
-  notebookGithubHref: p.notebookGithubHref,
-}));
-
 const library = {
   generatedAt: new Date().toISOString(),
   totalPapers: papers.length,
@@ -231,9 +182,8 @@ const library = {
   lastUpdatedLabel: latest ? latest.dateAddedLabel : "No reviews on file",
   latest,
   groups,
-  graph: { nodes, links, groupLegend: SERIES_GROUPS.map((g) => g.name) },
 };
 
 fs.writeFileSync(path.join(ROOT, "library.json"), JSON.stringify(library, null, 2), "utf8");
 
-console.log(`Built library.json: ${papers.length} paper(s), ${links.length} connection(s), across ${seriesActiveCount} of ${allSeriesFlat.length} series.`);
+console.log(`Built library.json: ${papers.length} paper(s), across ${seriesActiveCount} of ${allSeriesFlat.length} series.`);

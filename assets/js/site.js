@@ -78,9 +78,6 @@
       links.push(`<a href="${p.reviewHref}" target="_blank" rel="noopener noreferrer">Review</a>`);
       links.push(`<a class="download-link" href="${p.reviewHref}" download="${escapeHtml(downloadName(p, "Review", "pdf"))}">Download</a>`);
     }
-    if (p.notebookGithubHref) {
-      links.push(`<a href="${p.notebookGithubHref}" target="_blank" rel="noopener noreferrer">Notebook</a>`);
-    }
     if (p.paperHref) {
       links.push(`<a href="${p.paperHref}" target="_blank" rel="noopener noreferrer">Original Paper</a>`);
     }

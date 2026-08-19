@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build library.json from list.json + graph.json + SERIES/
+      - name: Build library.json from list.jsonl + SERIES/
         run: node scripts/build.js
 
       - name: Assemble deploy folder
