@@ -425,6 +425,13 @@ table.data-table caption {
   letter-spacing: 0.02em;
   color: var(--navy);
   margin-bottom: 2mm;
+  /* A table's own break-inside:avoid does not reliably keep a top caption
+     glued to the table body across renderers: the caption can be left
+     stranded alone at the bottom of a page while the table it describes
+     starts fresh on the next. Forbidding a break immediately after the
+     caption forces the caption and the table body to paginate as one
+     unit, so the caption is never orphaned from its table. */
+  break-after: avoid;
 }
 table.data-table caption .table-number {
   color: var(--tweed);
@@ -467,6 +474,9 @@ figure.chart-figure figcaption {
   font-weight: 600;
   color: var(--navy);
   margin-bottom: 2mm;
+  /* Same rationale as table.data-table caption: never let a figure title
+     paginate away from the figure it introduces. */
+  break-after: avoid;
 }
 figure.chart-figure figcaption .figure-number { color: var(--tweed); margin-right: 1.5mm; }
 figure.chart-figure svg, figure.chart-figure img {
