@@ -1,0 +1,547 @@
+/* ==========================================================================
+   LITERATURE REVIEW — MASTER TEMPLATE STYLESHEET
+   One shared template for every review PDF in the library (CLAUDE.md §30).
+   Do not fork this file per report or per series. If a report needs a rule
+   this file does not have, add the rule here so every future report
+   inherits it, rather than solving it inline in one report.
+
+   Identity: Old Money + Institutional Research + European Financial
+   Journal + Traditional Investment Banking. Restrained, editorial, serious.
+
+   Renderer: WeasyPrint (CSS Paged Media). Page size A4.
+   ========================================================================== */
+
+/* ---- Fonts (self-hosted, embedded at render time) ---------------------- */
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-500-normal.woff2") format("woff2");
+  font-weight: 500; font-style: normal;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-600-italic.woff2") format("woff2");
+  font-weight: 600; font-style: italic;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/eb-garamond-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("fonts/source-serif-4-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-500-normal.woff2") format("woff2");
+  font-weight: 500; font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal;
+}
+
+/* ---- Palette (CLAUDE.md §30) -------------------------------------------- */
+:root {
+  --ivory: #F5F1E8;
+  --navy: #172A3A;
+  --tweed: #6B5744;
+  --olive: #3F4A32;
+  --camel: #C8AE82;
+  --hairline: #C9BCA1;
+}
+
+/* ---- Page geometry ------------------------------------------------------
+   Single source of truth for margins/spacing. Every report uses these
+   values verbatim — never invent a report-specific margin. */
+@page {
+  size: A4;
+  margin: 26mm 20mm 22mm 20mm;
+  background: var(--ivory);
+
+  @top-left {
+    content: element(runningTitle);
+  }
+  @top-right {
+    content: element(runningSeries);
+  }
+  @bottom-left {
+    content: "Literature Review \2014  Arthur Faugeron";
+    font-family: "Inter", sans-serif;
+    font-size: 7.6pt;
+    letter-spacing: 0.03em;
+    color: var(--tweed);
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Inter", sans-serif;
+    font-size: 7.6pt;
+    color: var(--tweed);
+  }
+}
+
+/* Front page: no running header/footer clutter, no page number box (page
+   number begins visibly from the second page). Uses the :first pseudo-class
+   rather than a named page, because switching to a named `page` value on
+   the first box forces an extra page break before it in CSS Paged Media —
+   :first applies automatically to page one with no such side effect. */
+@page :first {
+  margin: 20mm 20mm 20mm 20mm;
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+.running-title {
+  position: running(runningTitle);
+  font-family: "Inter", sans-serif;
+  font-size: 7.6pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--tweed);
+}
+.running-series {
+  position: running(runningSeries);
+  font-family: "Inter", sans-serif;
+  font-size: 7.6pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--tweed);
+}
+
+/* ---- Base ----------------------------------------------------------------*/
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ivory);
+  color: var(--navy);
+  font-family: "Source Serif 4", "EB Garamond", serif;
+  font-size: 10.3pt;
+  line-height: 1.52;
+  hyphens: none;
+}
+
+/* ---- Front page ------------------------------------------------------- */
+.front-page {
+  page-break-after: always; /* the one standing exception to "no forced breaks" */
+  display: block; /* never flex/grid on a page that must be able to overflow */
+  min-height: 0;
+}
+
+.front-kicker {
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tweed);
+  margin: 0 0 16mm 0;
+  text-align: center;
+}
+
+.front-title {
+  font-family: "EB Garamond", serif;
+  font-weight: 600;
+  font-size: 24pt;
+  line-height: 1.26;
+  color: var(--navy);
+  text-align: center;
+  margin: 0 6mm 7mm 6mm;
+}
+
+.front-authors {
+  font-family: "EB Garamond", serif;
+  font-size: 12.5pt;
+  font-style: italic;
+  text-align: center;
+  color: var(--tweed);
+  margin: 0 0 8mm 0;
+}
+
+.front-rule {
+  width: 34mm;
+  height: 0;
+  border-top: 0.9pt solid var(--camel);
+  margin: 0 auto 8mm auto;
+}
+
+.front-meta {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Inter", sans-serif;
+  font-size: 8.4pt;
+  margin: 0 auto 9mm auto;
+}
+.front-meta td {
+  padding: 2.6pt 0;
+  border-bottom: 0.5pt solid var(--hairline);
+  vertical-align: top;
+}
+.front-meta td.label {
+  width: 40mm;
+  color: var(--tweed);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 7.6pt;
+  padding-top: 3.4pt;
+}
+.front-meta td.value {
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.front-abstract-label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.6pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tweed);
+  margin: 0 0 4mm 0;
+}
+.front-abstract {
+  font-family: "Source Serif 4", serif;
+  font-size: 9.6pt;
+  line-height: 1.6;
+  color: var(--navy);
+  text-align: justify;
+  margin: 0;
+}
+
+.front-footer {
+  margin-top: 8mm;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  color: var(--tweed);
+}
+
+/* ---- Section structure --------------------------------------------------
+   Ordinary section transitions are never manually broken; they flow. */
+.section {
+  margin-top: 9mm;
+}
+.section:first-of-type { margin-top: 0; }
+
+h1.section-title {
+  font-family: "EB Garamond", serif;
+  font-weight: 600;
+  font-size: 15pt;
+  color: var(--navy);
+  letter-spacing: 0.01em;
+  margin: 0 0 5mm 0;
+  padding-bottom: 2.4mm;
+  border-bottom: 1pt solid var(--navy);
+  break-after: avoid;
+}
+.section-number {
+  color: var(--tweed);
+  font-weight: 500;
+  margin-right: 2mm;
+}
+
+h2.subsection-title {
+  font-family: "EB Garamond", serif;
+  font-weight: 600;
+  font-size: 12.2pt;
+  color: var(--navy);
+  margin: 6mm 0 3mm 0;
+  break-after: avoid;
+}
+
+h3.sub-subsection-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 9.6pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--tweed);
+  margin: 4.5mm 0 2.4mm 0;
+  break-after: avoid;
+}
+
+p { margin: 0 0 3mm 0; text-align: justify; orphans: 3; widows: 3; }
+p.lede {
+  font-style: italic;
+  color: var(--tweed);
+}
+
+strong { font-weight: 600; color: var(--navy); }
+em { font-style: italic; }
+
+/* Distinguish PAPER / EVIDENCE / CRITIQUE / INFERENCE / EXTENSION tags used
+   inline per CLAUDE.md §4. Small caps label, not a colored badge. */
+.tag {
+  font-family: "Inter", sans-serif;
+  font-size: 7.4pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+/* ---- Lists ---------------------------------------------------------------
+   Used only where content is genuinely list-like and consistently across
+   structurally equivalent sections. No bullet glyphs from AI defaults —
+   restrained hyphen-in-margin style. */
+ul, ol {
+  margin: 0 0 3mm 0;
+  padding-left: 5mm;
+}
+ul { list-style: none; }
+ul > li {
+  position: relative;
+  padding-left: 4mm;
+  margin-bottom: 1.6mm;
+  text-align: justify;
+}
+ul > li::before {
+  content: "\2013"; /* en dash marker, not asterisk */
+  position: absolute;
+  left: 0;
+  color: var(--tweed);
+}
+ol > li { margin-bottom: 1.6mm; text-align: justify; }
+
+/* ---- Equations ------------------------------------------------------------
+   Reproduced formally, centered, with a right-aligned equation number.
+   No decorative boxes. */
+.equation {
+  display: table;
+  width: 100%;
+  margin: 5mm 0;
+  break-inside: avoid;
+}
+.equation .eq-body {
+  display: table-cell;
+  text-align: center;
+  font-family: "EB Garamond", serif;
+  font-size: 12.5pt;
+  font-style: italic;
+  color: var(--navy);
+  padding: 0 8mm;
+}
+.equation .eq-number {
+  display: table-cell;
+  width: 14mm;
+  text-align: right;
+  vertical-align: middle;
+  font-family: "Source Serif 4", serif;
+  font-size: 9.5pt;
+  color: var(--tweed);
+  white-space: nowrap;
+}
+.eq-inline {
+  font-family: "EB Garamond", serif;
+  font-style: italic;
+  font-size: 10.6pt;
+}
+sub, sup { font-size: 72%; }
+
+.definitions {
+  margin: 2mm 0 4mm 0;
+  font-size: 9.6pt;
+}
+.definitions .def-row {
+  display: table;
+  width: 100%;
+  margin-bottom: 1.2mm;
+}
+.definitions .def-term {
+  display: table-cell;
+  width: 16mm;
+  font-family: "EB Garamond", serif;
+  font-style: italic;
+  color: var(--navy);
+  vertical-align: top;
+}
+.definitions .def-desc {
+  display: table-cell;
+  vertical-align: top;
+  color: var(--navy);
+}
+
+/* ---- Tables ---------------------------------------------------------------
+   Traditional, restrained. No rounded corners, no zebra striping, no
+   heavy borders — hairline rules only, in the manner of a printed
+   research journal. */
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4mm 0 3mm 0;
+  font-family: "Inter", sans-serif;
+  font-size: 8.4pt;
+  break-inside: avoid;
+}
+table.data-table caption {
+  caption-side: top;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+  margin-bottom: 2mm;
+}
+table.data-table caption .table-number {
+  color: var(--tweed);
+  margin-right: 1.5mm;
+}
+table.data-table thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--navy);
+  border-top: 1pt solid var(--navy);
+  border-bottom: 0.75pt solid var(--navy);
+  padding: 2.2mm 2.4mm;
+  background: transparent;
+}
+table.data-table td {
+  padding: 1.9mm 2.4mm;
+  border-bottom: 0.4pt solid var(--hairline);
+  color: var(--navy);
+  vertical-align: top;
+}
+table.data-table tbody tr:last-child td {
+  border-bottom: 1pt solid var(--navy);
+}
+table.data-table td.num, table.data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.table-source {
+  font-family: "Inter", sans-serif;
+  font-size: 7.4pt;
+  color: var(--tweed);
+  margin-top: 1.6mm;
+}
+
+/* ---- Figures ---------------------------------------------------------- */
+figure.chart-figure {
+  margin: 4mm 0 3mm 0;
+  break-inside: avoid;
+}
+figure.chart-figure figcaption {
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 2mm;
+}
+figure.chart-figure figcaption .figure-number { color: var(--tweed); margin-right: 1.5mm; }
+figure.chart-figure svg, figure.chart-figure img {
+  width: 100%;
+  display: block;
+}
+.figure-note {
+  font-family: "Inter", sans-serif;
+  font-size: 7.4pt;
+  color: var(--tweed);
+  margin-top: 1.6mm;
+}
+
+/* ---- Callout blocks (Established / Not Established etc., §15) --------- */
+.finding-block {
+  margin: 3mm 0;
+  padding: 3mm 0 3mm 4mm;
+  border-left: 1.6pt solid var(--camel);
+}
+.finding-block .finding-label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.8pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--olive);
+  display: block;
+  margin-bottom: 1mm;
+}
+
+/* ---- Research idea cards (§24) — treated as structured prose blocks --- */
+.idea-block {
+  margin: 4mm 0 5mm 0;
+  break-inside: avoid;
+}
+.idea-block .idea-title {
+  font-family: "EB Garamond", serif;
+  font-weight: 600;
+  font-size: 11.2pt;
+  color: var(--navy);
+  margin-bottom: 1.6mm;
+}
+.idea-field {
+  margin-bottom: 1mm;
+}
+.idea-field .idea-field-label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.6pt;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tweed);
+  display: inline;
+}
+
+/* ---- Footnote-style source lines --------------------------------------- */
+.footnote {
+  font-family: "Source Serif 4", serif;
+  font-size: 8pt;
+  color: var(--tweed);
+  font-style: italic;
+}
+
+/* ---- Bibliography ------------------------------------------------------- */
+.bibliography p {
+  text-align: left;
+  text-indent: -8mm;
+  padding-left: 8mm;
+  margin-bottom: 2.6mm;
+  font-size: 9.6pt;
+}
+
+/* ---- Divider ------------------------------------------------------------ */
+hr.section-divider {
+  border: none;
+  border-top: 0.5pt solid var(--hairline);
+  margin: 6mm 0;
+}
