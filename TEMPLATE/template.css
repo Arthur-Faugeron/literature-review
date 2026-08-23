@@ -495,6 +495,12 @@ figure.chart-figure svg, figure.chart-figure img {
   margin: 3mm 0;
   padding: 3mm 0 3mm 4mm;
   border-left: 1.6pt solid var(--camel);
+  /* Same rationale as table/figure captions: a short label must never be
+     stranded alone at the bottom of a page while its own finding text
+     starts fresh on the next. Keep the whole callout together; these
+     blocks are always short enough that this does not strand large
+     amounts of trailing whitespace. */
+  break-inside: avoid;
 }
 .finding-block .finding-label {
   font-family: "Inter", sans-serif;
