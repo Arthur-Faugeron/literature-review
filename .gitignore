@@ -5,3 +5,6 @@ node_modules/
 CLAUDE.md
 library.json
 _site/
+*.lock
+~$*
+~*.tmp
