@@ -389,6 +389,10 @@ sub, sup { font-size: 72%; }
   display: table;
   width: 100%;
   margin-bottom: 1.2mm;
+  /* A def-term (e.g. a single variable symbol) must never be stranded at the
+     bottom of a page while its own def-desc starts fresh on the next —
+     the same orphaning risk as table/figure captions, fixed the same way. */
+  break-inside: avoid;
 }
 .definitions .def-term {
   display: table-cell;
