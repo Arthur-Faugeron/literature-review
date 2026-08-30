@@ -62,6 +62,7 @@ const SERIES_GROUPS = [
   {
     name: "Econophysics & Complex Systems",
     series: [
+      "Econophysics",
       "Statistical Mechanics of Financial Markets",
       "Agent-Based Modeling",
       "Network Theory in Finance",
