@@ -45,13 +45,27 @@ const SERIES_GROUPS = [
       "Quantitative Finance",
       "Financial Econometrics",
       "Econometrics",
-      "Statistics",
-      "Mathematics",
+      "Theoretical Statistics",
+      "Applied Statistics",
+      "Computational Statistics",
+      "Bayesian Statistics",
+      "Pure Mathematics",
+      "Applied Mathematics",
+      "Mathematical Finance",
       "Optimization",
       "Time Series",
       "Data Science",
       "Machine Learning & AI",
       "Financial Technology",
+    ],
+  },
+  {
+    name: "Econophysics & Complex Systems",
+    series: [
+      "Statistical Mechanics of Financial Markets",
+      "Agent-Based Modeling",
+      "Network Theory in Finance",
+      "Market Microstructure Physics",
     ],
   },
   {
@@ -113,21 +127,21 @@ if (fs.existsSync(SERIES_ROOT)) {
 
 function buildPaper(entry) {
   const actualSeriesDir = dirByNormalizedSeries.get(normalize(entry.series));
-  const folder = actualSeriesDir ? path.join(SERIES_ROOT, actualSeriesDir, entry.id) : null;
+  const seriesPath = actualSeriesDir ? path.join(SERIES_ROOT, actualSeriesDir) : null;
 
-  const reviewPath = folder ? path.join(folder, "review.pdf") : null;
-  const paperPath = folder ? path.join(folder, "paper.pdf") : null;
+  const reviewPath = seriesPath ? path.join(seriesPath, entry.id + ".pdf") : null;
+  const paperPath = seriesPath ? path.join(seriesPath, entry.id + "_paper.pdf") : null;
 
   const reviewExists = !!reviewPath && fs.existsSync(reviewPath);
   const paperExists = !!paperPath && fs.existsSync(paperPath);
 
   if (!reviewExists) {
-    console.warn(`Warning: review.pdf not found for "${entry.id}" (expected under SERIES/${entry.series}/${entry.id}/)`);
+    console.warn(`Warning: review.pdf not found for "${entry.id}" (expected at SERIES/${entry.series}/${entry.id}.pdf)`);
   }
 
   const seriesSegment = actualSeriesDir || entry.series;
   const dateAdded = parseDateFromId(entry.id);
-  const repoPathPrefix = ["SERIES", seriesSegment, entry.id];
+  const repoPathPrefix = ["SERIES", seriesSegment];
 
   return {
     id: entry.id,
@@ -136,19 +150,11 @@ function buildPaper(entry) {
     authorsLabel: (entry.authors || []).join(", "),
     year: entry.year || null,
     series: entry.series,
-    field: entry.field || null,
-    subfield: entry.subfield || null,
-    keywords: entry.keywords || [],
-    methods: entry.methods || [],
-    datasets: entry.datasets || [],
-    researchQuestion: entry.research_question || null,
-    mainFinding: entry.main_finding || null,
-    researchGaps: entry.research_gaps || [],
-    researchIdeas: entry.research_ideas || [],
+
     dateAddedIso: dateAdded ? dateAdded.toISOString().slice(0, 10) : null,
     dateAddedLabel: dateAdded ? formatDate(dateAdded) : "Undated",
-    reviewHref: reviewExists ? encodePath([...repoPathPrefix, "review.pdf"]) : null,
-    paperHref: paperExists ? encodePath([...repoPathPrefix, "paper.pdf"]) : null,
+    reviewHref: reviewExists ? encodePath([...repoPathPrefix, entry.id + ".pdf"]) : null,
+    paperHref: paperExists ? encodePath([...repoPathPrefix, entry.id + "_paper.pdf"]) : null,
   };
 }
 
