@@ -379,7 +379,15 @@ ol > li { margin-bottom: 1.6mm; text-align: justify; }
   font-style: italic;
   font-size: 10.6pt;
 }
-sub, sup { font-size: 72%; }
+/* line-height:0 stops an inline sub/sup from inflating the height of the
+   text line it sits on -- without it, any prose line carrying an inline
+   equation variable (e.g. rho_k) renders with a visibly taller gap above
+   and below it than ordinary lines in the same paragraph, producing
+   inconsistent-looking paragraph spacing wherever CLAUDE.md's mandatory
+   inline equation notation (SS9) is used in running text. */
+sub, sup { font-size: 72%; line-height: 0; position: relative; }
+sub { vertical-align: sub; bottom: -0.1em; }
+sup { vertical-align: super; top: -0.1em; }
 
 .definitions {
   margin: 2mm 0 4mm 0;
