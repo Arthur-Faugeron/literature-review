@@ -426,6 +426,30 @@ table.data-table {
   margin: 4mm 0 3mm 0;
   font-family: "Inter", sans-serif;
   font-size: 8.4pt;
+  /* Deliberately no break-inside:avoid on the table element itself, unlike
+     the short single-page blocks elsewhere in this file (equations,
+     definitions, finding-blocks, idea-blocks). A data table can
+     legitimately be taller than one page (e.g. a >10-row
+     literature-connections table), and when it is, a hard "keep together"
+     on the whole table cannot be honoured — the renderer's fallback in
+     that case has been observed to strand the caption alone on one page
+     with the entire table body starting fresh on the next, which is a
+     worse defect than letting the table paginate normally. Row-level
+     protection is applied separately below instead (see the tbody tr
+     rule): rows are NOT automatically kept intact by the browser's table
+     fragmentation model — without that explicit rule, a single row's
+     wrapped cell content has been observed splitting across the page
+     boundary mid-row, which is exactly the defect this section exists to
+     prevent. thead is a table-header-group by default, so the column
+     headers repeat automatically if the table continues onto a further
+     page. */
+}
+table.data-table tbody tr {
+  /* Keeps one row's cells together so a wrapped "Relationship"-style cell
+     is never split mid-row across a page boundary (see the note on the
+     table rule above). Rows are short enough that this never strands a
+     large amount of trailing whitespace the way avoiding breaks inside
+     the whole table would. */
   break-inside: avoid;
 }
 table.data-table caption {
