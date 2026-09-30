@@ -597,3 +597,7 @@ hr.section-divider {
   border-top: 0.5pt solid var(--hairline);
   margin: 6mm 0;
 }
+
+/* Short tables (up to about ten rows) are kept whole on one page so that no
+   row is ever stranded on a following page. Apply class "keep" to them. */
+table.data-table.keep { break-inside: avoid; }
