@@ -15,72 +15,99 @@
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-400-normal.woff2") format("woff2");
-  font-weight: 400; font-style: normal;
+  font-weight: 400;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-400-italic.woff2") format("woff2");
-  font-weight: 400; font-style: italic;
+  font-weight: 400;
+  font-style: italic;
 }
+
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-500-normal.woff2") format("woff2");
-  font-weight: 500; font-style: normal;
+  font-weight: 500;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-600-normal.woff2") format("woff2");
-  font-weight: 600; font-style: normal;
+  font-weight: 600;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-600-italic.woff2") format("woff2");
-  font-weight: 600; font-style: italic;
+  font-weight: 600;
+  font-style: italic;
 }
+
 @font-face {
   font-family: "EB Garamond";
   src: url("fonts/eb-garamond-latin-700-normal.woff2") format("woff2");
-  font-weight: 700; font-style: normal;
+  font-weight: 700;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Source Serif 4";
   src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
-  font-weight: 400; font-style: normal;
+  font-weight: 400;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Source Serif 4";
   src: url("fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
-  font-weight: 400; font-style: italic;
+  font-weight: 400;
+  font-style: italic;
 }
+
 @font-face {
   font-family: "Source Serif 4";
   src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
-  font-weight: 600; font-style: normal;
+  font-weight: 600;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Source Serif 4";
   src: url("fonts/source-serif-4-latin-700-normal.woff2") format("woff2");
-  font-weight: 700; font-style: normal;
+  font-weight: 700;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Inter";
   src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
-  font-weight: 400; font-style: normal;
+  font-weight: 400;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Inter";
   src: url("fonts/inter-latin-500-normal.woff2") format("woff2");
-  font-weight: 500; font-style: normal;
+  font-weight: 500;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Inter";
   src: url("fonts/inter-latin-600-normal.woff2") format("woff2");
-  font-weight: 600; font-style: normal;
+  font-weight: 600;
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Inter";
   src: url("fonts/inter-latin-700-normal.woff2") format("woff2");
-  font-weight: 700; font-style: normal;
+  font-weight: 700;
+  font-style: normal;
 }
 
 /* ---- Palette (CLAUDE.md §30) -------------------------------------------- */
@@ -104,19 +131,22 @@
   @top-left {
     content: element(runningTitle);
   }
+
   @top-right {
     content: element(runningSeries);
   }
+
   @bottom-left {
     content: "Literature Review \2014  Arthur Faugeron";
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
     font-size: 7.6pt;
     letter-spacing: 0.03em;
     color: var(--tweed);
   }
+
   @bottom-right {
     content: counter(page) " / " counter(pages);
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
     font-size: 7.6pt;
     color: var(--tweed);
   }
@@ -129,23 +159,36 @@
    :first applies automatically to page one with no such side effect. */
 @page :first {
   margin: 20mm 20mm 20mm 20mm;
-  @top-left { content: none; }
-  @top-right { content: none; }
-  @bottom-left { content: none; }
-  @bottom-right { content: none; }
+
+  @top-left {
+    content: none;
+  }
+
+  @top-right {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+
+  @bottom-right {
+    content: none;
+  }
 }
 
 .running-title {
   position: running(runningTitle);
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.6pt;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--tweed);
 }
+
 .running-series {
   position: running(runningSeries);
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.6pt;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -153,14 +196,17 @@
 }
 
 /* ---- Base ----------------------------------------------------------------*/
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background: var(--ivory);
   color: var(--navy);
-  font-family: "Source Serif 4", "EB Garamond", serif;
+  font-family: "Source Serif 4", "Source Serif 4 Greek", "Source Serif 4 Ext", "Math Symbols", "EB Garamond", serif;
   font-size: 10.3pt;
   line-height: 1.52;
   hyphens: none;
@@ -168,13 +214,15 @@ html, body {
 
 /* ---- Front page ------------------------------------------------------- */
 .front-page {
-  page-break-after: always; /* the one standing exception to "no forced breaks" */
-  display: block; /* never flex/grid on a page that must be able to overflow */
+  page-break-after: always;
+  /* the one standing exception to "no forced breaks" */
+  display: block;
+  /* never flex/grid on a page that must be able to overflow */
   min-height: 0;
 }
 
 .front-kicker {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8pt;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -184,7 +232,7 @@ html, body {
 }
 
 .front-title {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-weight: 600;
   font-size: 24pt;
   line-height: 1.26;
@@ -194,7 +242,7 @@ html, body {
 }
 
 .front-authors {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-size: 12.5pt;
   font-style: italic;
   text-align: center;
@@ -212,15 +260,17 @@ html, body {
 .front-meta {
   width: 100%;
   border-collapse: collapse;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8.4pt;
   margin: 0 auto 9mm auto;
 }
+
 .front-meta td {
   padding: 2.6pt 0;
   border-bottom: 0.5pt solid var(--hairline);
   vertical-align: top;
 }
+
 .front-meta td.label {
   width: 40mm;
   color: var(--tweed);
@@ -229,21 +279,23 @@ html, body {
   font-size: 7.6pt;
   padding-top: 3.4pt;
 }
+
 .front-meta td.value {
   color: var(--navy);
   font-weight: 500;
 }
 
 .front-abstract-label {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.6pt;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--tweed);
   margin: 0 0 4mm 0;
 }
+
 .front-abstract {
-  font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", "Source Serif 4 Greek", "Source Serif 4 Ext", "Math Symbols", serif;
   font-size: 9.6pt;
   line-height: 1.6;
   color: var(--navy);
@@ -254,7 +306,7 @@ html, body {
 .front-footer {
   margin-top: 8mm;
   text-align: center;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8pt;
   color: var(--tweed);
 }
@@ -264,10 +316,13 @@ html, body {
 .section {
   margin-top: 9mm;
 }
-.section:first-of-type { margin-top: 0; }
+
+.section:first-of-type {
+  margin-top: 0;
+}
 
 h1.section-title {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-weight: 600;
   font-size: 15pt;
   color: var(--navy);
@@ -277,6 +332,7 @@ h1.section-title {
   border-bottom: 1pt solid var(--navy);
   break-after: avoid;
 }
+
 .section-number {
   color: var(--tweed);
   font-weight: 500;
@@ -284,7 +340,7 @@ h1.section-title {
 }
 
 h2.subsection-title {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-weight: 600;
   font-size: 12.2pt;
   color: var(--navy);
@@ -293,7 +349,7 @@ h2.subsection-title {
 }
 
 h3.sub-subsection-title {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-weight: 600;
   font-size: 9.6pt;
   letter-spacing: 0.03em;
@@ -303,19 +359,31 @@ h3.sub-subsection-title {
   break-after: avoid;
 }
 
-p { margin: 0 0 3mm 0; text-align: justify; orphans: 3; widows: 3; }
+p {
+  margin: 0 0 3mm 0;
+  text-align: justify;
+  orphans: 3;
+  widows: 3;
+}
+
 p.lede {
   font-style: italic;
   color: var(--tweed);
 }
 
-strong { font-weight: 600; color: var(--navy); }
-em { font-style: italic; }
+strong {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+em {
+  font-style: italic;
+}
 
 /* Distinguish PAPER / EVIDENCE / CRITIQUE / INFERENCE / EXTENSION tags used
    inline per CLAUDE.md §4. Small caps label, not a colored badge. */
 .tag {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.4pt;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -327,24 +395,35 @@ em { font-style: italic; }
    Used only where content is genuinely list-like and consistently across
    structurally equivalent sections. No bullet glyphs from AI defaults —
    restrained hyphen-in-margin style. */
-ul, ol {
+ul,
+ol {
   margin: 0 0 3mm 0;
   padding-left: 5mm;
 }
-ul { list-style: none; }
-ul > li {
+
+ul {
+  list-style: none;
+}
+
+ul>li {
   position: relative;
   padding-left: 4mm;
   margin-bottom: 1.6mm;
   text-align: justify;
 }
-ul > li::before {
-  content: "\2013"; /* en dash marker, not asterisk */
+
+ul>li::before {
+  content: "\2013";
+  /* en dash marker, not asterisk */
   position: absolute;
   left: 0;
   color: var(--tweed);
 }
-ol > li { margin-bottom: 1.6mm; text-align: justify; }
+
+ol>li {
+  margin-bottom: 1.6mm;
+  text-align: justify;
+}
 
 /* ---- Equations ------------------------------------------------------------
    Reproduced formally, centered, with a right-aligned equation number.
@@ -355,44 +434,62 @@ ol > li { margin-bottom: 1.6mm; text-align: justify; }
   margin: 5mm 0;
   break-inside: avoid;
 }
+
 .equation .eq-body {
   display: table-cell;
   text-align: center;
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-size: 12.5pt;
   font-style: italic;
   color: var(--navy);
   padding: 0 8mm;
 }
+
 .equation .eq-number {
   display: table-cell;
   width: 14mm;
   text-align: right;
   vertical-align: middle;
-  font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", "Source Serif 4 Greek", "Source Serif 4 Ext", "Math Symbols", serif;
   font-size: 9.5pt;
   color: var(--tweed);
   white-space: nowrap;
 }
+
 .eq-inline {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-style: italic;
   font-size: 10.6pt;
 }
+
 /* line-height:0 stops an inline sub/sup from inflating the height of the
    text line it sits on -- without it, any prose line carrying an inline
    equation variable (e.g. rho_k) renders with a visibly taller gap above
    and below it than ordinary lines in the same paragraph, producing
    inconsistent-looking paragraph spacing wherever CLAUDE.md's mandatory
    inline equation notation (SS9) is used in running text. */
-sub, sup { font-size: 72%; line-height: 0; position: relative; }
-sub { vertical-align: sub; bottom: -0.1em; }
-sup { vertical-align: super; top: -0.1em; }
+sub,
+sup {
+  font-size: 72%;
+  line-height: 0;
+  position: relative;
+}
+
+sub {
+  vertical-align: sub;
+  bottom: -0.1em;
+}
+
+sup {
+  vertical-align: super;
+  top: -0.1em;
+}
 
 .definitions {
   margin: 2mm 0 4mm 0;
   font-size: 9.6pt;
 }
+
 .definitions .def-row {
   display: table;
   width: 100%;
@@ -402,14 +499,16 @@ sup { vertical-align: super; top: -0.1em; }
      the same orphaning risk as table/figure captions, fixed the same way. */
   break-inside: avoid;
 }
+
 .definitions .def-term {
   display: table-cell;
   width: 16mm;
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-style: italic;
   color: var(--navy);
   vertical-align: top;
 }
+
 .definitions .def-desc {
   display: table-cell;
   vertical-align: top;
@@ -424,7 +523,7 @@ table.data-table {
   width: 100%;
   border-collapse: collapse;
   margin: 4mm 0 3mm 0;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8.4pt;
   /* Deliberately no break-inside:avoid on the table element itself, unlike
      the short single-page blocks elsewhere in this file (equations,
@@ -444,6 +543,7 @@ table.data-table {
      headers repeat automatically if the table continues onto a further
      page. */
 }
+
 table.data-table tbody tr {
   /* Keeps one row's cells together so a wrapped "Relationship"-style cell
      is never split mid-row across a page boundary (see the note on the
@@ -452,10 +552,11 @@ table.data-table tbody tr {
      the whole table would. */
   break-inside: avoid;
 }
+
 table.data-table caption {
   caption-side: top;
   text-align: left;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8pt;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -469,10 +570,12 @@ table.data-table caption {
      unit, so the caption is never orphaned from its table. */
   break-after: avoid;
 }
+
 table.data-table caption .table-number {
   color: var(--tweed);
   margin-right: 1.5mm;
 }
+
 table.data-table thead th {
   text-align: left;
   font-weight: 600;
@@ -482,18 +585,26 @@ table.data-table thead th {
   padding: 2.2mm 2.4mm;
   background: transparent;
 }
+
 table.data-table td {
   padding: 1.9mm 2.4mm;
   border-bottom: 0.4pt solid var(--hairline);
   color: var(--navy);
   vertical-align: top;
 }
+
 table.data-table tbody tr:last-child td {
   border-bottom: 1pt solid var(--navy);
 }
-table.data-table td.num, table.data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+table.data-table td.num,
+table.data-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .table-source {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.4pt;
   color: var(--tweed);
   margin-top: 1.6mm;
@@ -504,8 +615,9 @@ figure.chart-figure {
   margin: 4mm 0 3mm 0;
   break-inside: avoid;
 }
+
 figure.chart-figure figcaption {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 8pt;
   font-weight: 600;
   color: var(--navy);
@@ -514,13 +626,20 @@ figure.chart-figure figcaption {
      paginate away from the figure it introduces. */
   break-after: avoid;
 }
-figure.chart-figure figcaption .figure-number { color: var(--tweed); margin-right: 1.5mm; }
-figure.chart-figure svg, figure.chart-figure img {
+
+figure.chart-figure figcaption .figure-number {
+  color: var(--tweed);
+  margin-right: 1.5mm;
+}
+
+figure.chart-figure svg,
+figure.chart-figure img {
   width: 100%;
   display: block;
 }
+
 .figure-note {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.4pt;
   color: var(--tweed);
   margin-top: 1.6mm;
@@ -538,8 +657,9 @@ figure.chart-figure svg, figure.chart-figure img {
      amounts of trailing whitespace. */
   break-inside: avoid;
 }
+
 .finding-block .finding-label {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.8pt;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -554,18 +674,21 @@ figure.chart-figure svg, figure.chart-figure img {
   margin: 4mm 0 5mm 0;
   break-inside: avoid;
 }
+
 .idea-block .idea-title {
-  font-family: "EB Garamond", serif;
+  font-family: "EB Garamond", "EB Garamond Greek", "Math Symbols", serif;
   font-weight: 600;
   font-size: 11.2pt;
   color: var(--navy);
   margin-bottom: 1.6mm;
 }
+
 .idea-field {
   margin-bottom: 1mm;
 }
+
 .idea-field .idea-field-label {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Greek", "Math Symbols", sans-serif;
   font-size: 7.6pt;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -576,7 +699,7 @@ figure.chart-figure svg, figure.chart-figure img {
 
 /* ---- Footnote-style source lines --------------------------------------- */
 .footnote {
-  font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", "Source Serif 4 Greek", "Source Serif 4 Ext", "Math Symbols", serif;
   font-size: 8pt;
   color: var(--tweed);
   font-style: italic;
@@ -600,4 +723,122 @@ hr.section-divider {
 
 /* Short tables (up to about ten rows) are kept whole on one page so that no
    row is ever stranded on a following page. Apply class "keep" to them. */
-table.data-table.keep { break-inside: avoid; }
+table.data-table.keep {
+  break-inside: avoid;
+}
+/* ---- Glyph coverage additions (Greek letters and mathematical symbols) ----
+   The Latin subsets above contain no Greek or math operators, which the
+   equations in every review need. These faces extend the same families by
+   unicode-range so that Greek letters render in the report typeface, and
+   operators come from STIX General. Added to the template so all future
+   reports inherit them. */
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-600-italic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "EB Garamond Greek";
+  src: url("fonts/eb-garamond-greek-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Greek";
+  src: url("fonts/source-serif-4-greek-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Greek";
+  src: url("fonts/source-serif-4-greek-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Greek";
+  src: url("fonts/source-serif-4-greek-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Greek";
+  src: url("fonts/source-serif-4-greek-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter Greek";
+  src: url("fonts/inter-greek-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter Greek";
+  src: url("fonts/inter-greek-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter Greek";
+  src: url("fonts/inter-greek-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter Greek";
+  src: url("fonts/inter-greek-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Ext";
+  src: url("fonts/source-serif-4-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Math Symbols";
+  src: url("fonts/stix-general-symbols.ttf") format("truetype");
+    }
+
