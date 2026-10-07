@@ -29,7 +29,14 @@
   <div class="rule-double" role="presentation"></div>
 
   <section class="search">
-    <label class="search-label" for="archive-search">Search</label>
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+      <label class="search-label" for="archive-search" style="margin-bottom: 0;">Search</label>
+      <div class="archive-controls" style="font-size: 0.85rem;">
+        <button type="button" id="expand-all" style="background: none; border: none; color: #666; cursor: pointer; text-decoration: underline; padding: 0; font-family: inherit;">Expand all</button>
+        <span style="color: #ccc; margin: 0 4px;">|</span>
+        <button type="button" id="collapse-all" style="background: none; border: none; color: #666; cursor: pointer; text-decoration: underline; padding: 0; font-family: inherit;">Collapse all</button>
+      </div>
+    </div>
     <input type="search" id="archive-search" class="search-input" placeholder="Search by title, author, series, keyword, or method&hellip;" disabled autocomplete="off">
   </section>
 
@@ -44,7 +51,7 @@
 
   <footer class="colophon">
     <p>Compiled independently as a private research library. Not investment advice. All papers remain the intellectual property of their original authors and publishers.</p>
-    <p class="colophon-sub">Literature Review &middot; Arthur Faugeron &middot; Est. 2026</p>
+    <p class="colophon-sub">Literature Review &middot; Arthur Faugeron &middot; Est. 2026 &middot; <a href="https://github.com/Arthur-Faugeron/literature-review/issues" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Feedback / Issues</a></p>
   </footer>
 
 </div>
