@@ -65,14 +65,12 @@
   Extension=.ttf,
   UprightFont=*-Regular,
   ItalicFont=*-Italic,
-  BoldFont=*-SemiBold,
-  BoldItalicFont=*-SemiBoldItalic]
+  BoldFont=*-SemiBold]
 
 \newfontfamily\lrserifsb{EBGaramond-SemiBold}[
   Path=fonts/,
   Extension=.ttf,
-  UprightFont=*,
-  ItalicFont=EBGaramond-SemiBoldItalic]
+  UprightFont=*]
 
 \newfontfamily\lrsans{Inter}[
   Path=fonts/,

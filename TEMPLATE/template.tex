@@ -1,0 +1,314 @@
+%% ============================================================================
+%% template.tex  --  Literature Review: the single master template
+%%
+%% Copy this file to start a review, keep lrreview.cls and fonts/ beside it.
+%% Build with XeLaTeX, twice:   xelatex template.tex   (or: latexmk -xelatex)
+%% Style rules live in lrreview.cls only. Never add margins, spacing or font
+%% sizes in a report. If a rule is missing, add it to lrreview.cls.
+%% No manual page breaks. No em dashes, hash signs or asterisks in the text.
+%% Citations in the text are author-year, with no hyperlinks and no numbers.
+%% Replace every bracketed placeholder below.
+%% ============================================================================
+\documentclass{lrreview}
+
+%% ---- Metadata (front page and running headers) -----------------------------
+\lrtitle{[Exact paper title as published]}
+\lrrunningtitle{[Short running title]}
+\lrauthors{[Author One, Author Two and Author Three]}
+\lryear{[Year]}
+\lrjournal{[Journal, volume(issue), pages, or working paper series]}
+\lrdoi{[DOI]}
+\lrarea{[Research area and subfield]}
+\lrseries{[Series name exactly as in CLAUDE.md]}
+\lrpapertype{[Theoretical, Empirical, Econometric, Computational, Experimental, Review, Methodological or Mixed]}
+\lrreviewer{Arthur Faugeron}
+\lrdatereviewed{[D Month YYYY]}
+
+\begin{document}
+
+%% ---- Front page: metadata table and one analytical abstract (150 to 220 words)
+\lrfrontpage{%
+[One tight paragraph of about 150 to 220 words in the reviewer's own words: the
+question, the data or model, the method, the main finding and the main limitation.
+It must end as a complete sentence so that it fits on the front page.]}
+
+%% ============================================================================
+\section{Introduction}
+
+\subsection{Paper identification and classification}
+[Paper type, field and subfield, version of the paper read in full.]
+
+\subsection{Executive understanding}
+\subsubsection{What is the paper trying to discover?}
+[Text.]
+\subsubsection{Why does the question matter?}
+[Text.]
+\subsubsection{What was known before, and what is missing?}
+[Text.]
+\subsubsection{What does the paper propose, how does it investigate, and what does it find?}
+[Text.]
+
+%% ============================================================================
+\section{Research Problem and Hypothesis}
+
+\subsection{Research question}
+\lrtag{Paper} [The precise question, not a topic description.]
+
+\subsection{Hypotheses}
+\begin{itemize}
+  \item\relax [First hypothesis.]
+  \item\relax [Second hypothesis.]
+\end{itemize}
+
+\subsection{Existing literature and research gap}
+[Text. Use the labels Paper, Evidence, Critique, Inference and Extension at the
+start of a paragraph so that the source of each statement is never ambiguous.]
+
+\subsection{Claimed contribution}
+\lrtag{Critique} [Whether the claimed contribution is actually demonstrated.]
+
+%% ============================================================================
+\section{Theoretical Framework and Mechanism}
+
+\subsection{[Model or mechanism]}
+\lrtag{Paper} [Every important equation must be shown, not only described.]
+\begin{equation}
+  y_t = \alpha + \beta\, x_t + \varepsilon_t .
+  \label{eq:main}
+\end{equation}
+\begin{lrdefs}
+  \lrdef{$y_t$}{[Meaning of each symbol.]}
+  \lrdef{$x_t$}{[Meaning.]}
+  \lrdef{$\beta$}{[Meaning, sign and units.]}
+\end{lrdefs}
+[What the equation says, which assumptions it needs, what it predicts, how the
+prediction is tested, and the derivation steps. Refer to it as Equation
+(\ref{eq:main}).]
+
+%% ============================================================================
+\section{Data and Empirical Strategy}
+
+\subsection{Data}
+[Source, sample period, frequency, geography, observations, filters, transformations.]
+
+\begin{lrtable}{[Table caption]}\label{tab:data}
+\begin{tabularx}{\linewidth}{@{}L L L r@{}}
+\lrtoprule
+\lrth{Series} & \lrth{Construction} & \lrth{Sample} & \lrth{Observations}\\
+\lrheadrule
+\relax [Series one] & [Construction] & [Period] & [N]\\
+\lrrowrule
+\relax [Series two] & [Construction] & [Period] & [N]\\
+\lrbottomrule
+\end{tabularx}
+\lrsource{Source: [Origin of the numbers; say whether copied from the paper (official) or computed by the reviewer (generated).]}
+\end{lrtable}
+
+\subsection{Empirical specification and identification}
+[Where does the identifying variation come from?]
+
+\subsection{Data limitations and biases}
+\begin{itemize}
+  \item\relax [Survivorship, look-ahead, selection, measurement error, data mining.]
+\end{itemize}
+
+%% ============================================================================
+\section{Results}
+
+\subsection{[Main result]}
+\lrtag{Evidence} [What was tested, found, its magnitude, statistical and economic
+significance, and what it means in intuitive units.]
+
+%% Figure example (needs an image file; keep it commented until one exists):
+%% \lrfigure{fig_example.png}
+%%   {[Figure title with units and period]}
+%%   {Source: [official source or generated by the reviewer]; [sample, units, notes].}
+
+%% ============================================================================
+\section{Robustness and Additional Tests}
+
+\begin{lrtable}{Robustness tests: concern, test, result and assessment}\label{tab:rob}
+\lrsans\fontsize{8.4}{10.5}\selectfont
+\begin{xltabular}{\linewidth}{@{}L L L L@{}}
+\lrtoprule
+\lrth{Concern} & \lrth{Test reported} & \lrth{Result} & \lrth{Does it resolve the concern?}\\
+\lrheadrule
+\endhead
+\lrbottomrule
+\endfoot
+\relax [Concern] & [Test] & [Result] & [Yes, Partly or No, and why]\\
+\lrrowrule
+\relax [Concern] & [Test] & [Result] & [Assessment]\\
+\end{xltabular}
+\lrsource{Source: [Origin].}
+\end{lrtable}
+
+%% ============================================================================
+\section{Critical Evaluation}
+
+\subsection{What the paper establishes}
+\begin{lrfinding}{Established}
+[Claims strongly supported by the evidence.]
+\end{lrfinding}
+\begin{lrfinding}{Supported but conditional}
+[Claims that depend on assumptions or particular specifications.]
+\end{lrfinding}
+\begin{lrfinding}{Suggestive}
+[Evidence consistent with a hypothesis but insufficient to establish it.]
+\end{lrfinding}
+\begin{lrfinding}{Not established}
+[Claims the paper cannot demonstrate.]
+\end{lrfinding}
+
+\subsection{Strengths}
+\subsubsection{Strengths recognised by the authors}
+\begin{itemize}
+  \item\relax [Strength and why it matters.]
+\end{itemize}
+\subsubsection{Strengths identified independently}
+\begin{itemize}
+  \item\relax [Strength and why it matters.]
+\end{itemize}
+
+\subsection{Weaknesses and critique}
+\subsubsection{Single most important weakness}
+\textbf{Problem.} [Text.] \textbf{Why it matters.} [Text.] \textbf{Potential bias.} [Text.]
+\textbf{How it could be tested.} [Text.]
+\subsubsection{Other weaknesses}
+\begin{itemize}
+  \item\relax [Problem, why it matters, potential bias, test.]
+\end{itemize}
+
+%% ============================================================================
+\section{Contradictions and Edge Cases}
+\lrtag{Critique} [Conditions under which the result should disappear, extreme
+values, parameter dependence, alternative mechanisms, with direct reasoning or
+illustrative calculation.]
+
+%% ============================================================================
+\section{Further Literature}
+
+\begin{lrtable}{Literature connections}\label{tab:lit}
+\lrsans\fontsize{8.4}{10.5}\selectfont
+\begin{xltabular}{\linewidth}{@{}L L L L@{}}
+\lrtoprule
+\lrth{Paper} & \lrth{Shared idea} & \lrth{Relationship} & \lrth{Why it matters}\\
+\lrheadrule
+\endhead
+\lrbottomrule
+\endfoot
+\relax [Author (Year)] & [Idea] & [Preceded, contradicted, extended, applied] & [Reason]\\
+\lrrowrule
+\relax [Author (Year)] & [Idea] & [Relationship] & [Reason]\\
+\end{xltabular}
+\lrsource{Source: [Origin].}
+\end{lrtable}
+
+%% ============================================================================
+\section{Research Gaps}
+
+\subsection{Paper-level gaps}
+\begin{itemize}
+  \item \textbf{Gap:} [Text.] \emph{Why it matters:} [Text.] \emph{Existing limitation:} [Text.] \emph{Way forward:} [Text.]
+\end{itemize}
+\subsection{Literature-level gaps}
+\begin{itemize}
+  \item\relax [Same four elements.]
+\end{itemize}
+\subsection{Methodological gaps}
+\begin{itemize}
+  \item\relax [Same four elements.]
+\end{itemize}
+
+%% ============================================================================
+\section{Research Opportunities}
+
+\begin{lridea}{Idea 1. [Title]}
+\lrfield{Research question}{[Text.]}
+\lrfield{Motivation}{[Text.]}
+\lrfield{Hypothesis}{[Text.]}
+\lrfield{Economic mechanism}{[Text.]}
+\lrfield{Literature connection}{[Text.]}
+\lrfield{Data}{[Text.]}
+\lrfield{Variables}{[Text.]}
+\lrfield{Method}{[Text.]}
+\lrfield{Identification strategy}{[Text.]}
+\lrfield{Expected contribution}{[Text.]}
+\lrfield{Main risk}{[Text.]}
+\end{lridea}
+
+%% Repeat the lridea block for about five ideas.
+
+\subsection{Ranking}
+\Needspace*{13\baselineskip}
+\begin{lrtable}{Ranking of research ideas (scores from 1 to 5, assigned by the reviewer)}
+\begin{tabularx}{\linewidth}{@{}L r r r r r r r@{}}
+\lrtoprule
+\lrth{Idea} & \lrth{Novelty} & \lrth{Feasibility} & \lrth{Data} & \lrth{Method} & \lrth{Importance} & \lrth{Contribution} & \lrth{Total}\\
+\lrheadrule
+\relax [1. Idea] & [n] & [n] & [n] & [n] & [n] & [n] & [n]\\
+\lrbottomrule
+\end{tabularx}
+\lrsource{Source: reviewer's subjective scoring.}
+\end{lrtable}
+[The top three ideas and why.]
+
+%% ============================================================================
+\section{Learning Framework}
+
+\subsection{Prerequisite concepts}
+\begin{itemize}
+  \item\relax [Concept.]
+\end{itemize}
+\subsection{Core concepts learned}
+\begin{itemize}
+  \item\relax [Concept.]
+\end{itemize}
+\subsection{Important equations}
+[Equations worth remembering, referred to by number.]
+\subsection{Methods learned}
+[Text.]
+\subsection{Questions to test understanding}
+\subsubsection{Comprehension}
+\begin{enumerate}
+  \item\relax [Question.]
+\end{enumerate}
+\subsubsection{Analysis}
+\begin{enumerate}
+  \item\relax [Question.]
+\end{enumerate}
+\subsubsection{Research}
+\begin{enumerate}
+  \item\relax [Question.]
+\end{enumerate}
+\subsection{Papers to read next}
+[Authors (Year); Authors (Year).]
+
+%% ============================================================================
+\section{Conclusion}
+
+\subsection{One-sentence thesis}
+[Text.]
+\subsection{Three most important insights}
+\begin{itemize}
+  \item\relax [Insight.]
+\end{itemize}
+\subsection{Strongest evidence}
+[Text.]
+\subsection{Biggest weakness}
+[Text.]
+\subsection{Most important research gap}
+[Text.]
+\subsection{Best research opportunity}
+[Text.]
+\subsection{Three papers to read next}
+[Authors (Year); Authors (Year); Authors (Year).]
+
+%% ============================================================================
+\section{References}
+\begin{lrbibliography}
+\lrref{[Author, A., and Author, B. (Year). Title. \emph{Journal}, volume(issue), pages. Add the version read, for example arXiv identifier and version.]}
+\lrref{[Next reference, alphabetical by first author.]}
+\end{lrbibliography}
+
+\end{document}
