@@ -173,9 +173,9 @@
 
 %% Keep headings with the text that follows (no forced page breaks anywhere,
 %% except after the front page).
-\preto\section{\Needspace{8\baselineskip}}
-\preto\subsection{\Needspace{5\baselineskip}}
-\preto\subsubsection{\Needspace{4\baselineskip}}
+\preto\section{\Needspace{14\baselineskip}}
+\preto\subsection{\Needspace{9\baselineskip}}
+\preto\subsubsection{\Needspace{5\baselineskip}}
 
 %% ---- Inline tags (PAPER, EVIDENCE, CRITIQUE, INFERENCE, EXTENSION) ----------
 \newcommand{\lrtag}[1]{{\lrsanssbtag\fontsize{7.4}{9}\selectfont\color{olive}\MakeUppercase{#1}}}
