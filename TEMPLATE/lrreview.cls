@@ -109,6 +109,8 @@
 \setmathfont{latinmodern-math.otf}
 \setmathfont[range=\mathup,Path=fonts/,Extension=.ttf]{EBGaramond-Regular}
 \setmathfont[range=\mathit,Path=fonts/,Extension=.ttf]{EBGaramond-Italic}
+%% Operators missing from EB Garamond (nabla, partial) come from Latin Modern Math.
+\setmathfont[range={"2207,"2202}]{latinmodern-math.otf}
 
 %% ---- Page geometry (single source of truth; never override per report) -----
 \geometry{a4paper,top=26mm,bottom=22mm,left=20mm,right=20mm,
@@ -145,7 +147,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[L]{{\lrsansrunning\fontsize{7.6}{9}\selectfont\color{tweed}\MakeUppercase{\lr@runtitle}}}
 \fancyhead[R]{{\lrsansrunning\fontsize{7.6}{9}\selectfont\color{tweed}\MakeUppercase{\lr@series}}}
-\fancyfoot[L]{{\lrsansrunning\fontsize{7.6}{9}\selectfont\color{tweed}Literature Review\,\textemdash\,\lr@reviewer}}
+\fancyfoot[L]{{\lrsansrunning\fontsize{7.6}{9}\selectfont\color{tweed}Literature Review,\ \lr@reviewer}}
 \fancyfoot[R]{{\lrsans\fontsize{7.6}{9}\selectfont\color{tweed}\thepage\ /\ \pageref{LastPage}}}
 
 %% ---- Sections ---------------------------------------------------------------
